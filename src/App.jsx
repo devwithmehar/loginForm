@@ -6,7 +6,7 @@ const App = () => {
   const [heading, setHeading] = useState('Enter Your Details');
 
   const onSubmit = (event) => {
-    console.log(event);
+    event.preventDefault();
     setHeading('You are Logged IN!')
   }
   return (

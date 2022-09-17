@@ -18,6 +18,10 @@
   gap: 5px;
   border-radius: 50px;
 }
+.success{
+  justify-content: center;
+  background-color: black;
+}
 .loginBtn{
   margin-top: 12px;
   font-size: large;

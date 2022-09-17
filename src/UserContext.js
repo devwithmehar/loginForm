@@ -25,24 +25,29 @@ export function UserContextProvider ({children}){
    const findUser = Database.users.find((userFound) => {
     return userFound.email.trim() === user.email.trim();
    })
-   console.log(findUser);
 
    if(findUser == null){
     setMessage("Email or Password is incorrect!");
     if(loginStatus) setLoginStatus(false);
+    setUser({
+      email:"",
+      password:"",
+     });
+
    }
    else {
     if(findUser.password.trim() === user.password.trim()){
        setLoginStatus(true);
        setMessage(`Congrats, You have login Successfully with email:  ${user.email}`);
-       setUser({
-        email:"",
-        password:"",
-       });
+
     }
     else{
       setMessage("Email or Password is incorrect!")
       if(loginStatus) setLoginStatus(false);
+      setUser({
+        email:"",
+        password:"",
+       });
     }
 
    }

@@ -3,7 +3,7 @@ import { UserContext } from '../UserContext';
 
 const Login = () => {
 
- const { user, setUser, onSubmit, message } = useContext(UserContext);
+ const { user, setUser, onSubmit, loginStatus, message } = useContext(UserContext);
 
   const onChange = (e) => {
     const {name, value} = e.target;
@@ -36,45 +36,62 @@ const Login = () => {
     }
   }
 
-  return (
-    <div className='login'>
-       <h3> Enter Your Details </h3>
-       <label htmlFor='email'>Email</label>
-       <input
-       type='email'
-       name='email'
-       id='email'
-       pattern=".+@globex\.com"
-       value={user.email}
-       onChange={onChange}
-       autoComplete="off"
-       />
+  if(loginStatus)
+  {
+    return (
+        <div className='login success'>
+        <h3 style={{color: 'green'}}>
+        {
+          message && message
+        }
+      </h3>
+        </div>
+    )
+  }
+  else {
+    return (
 
-    <label htmlFor='password'>Password</label>
-       <input
-       type='password'
-       name='password'
-       id='password'
-       value={user.password}
-       onChange={onChange}
-       autoComplete="off"
-       />
+      <div className='login'>
+         <h3> Enter Your Details </h3>
+         <label htmlFor='email'>Email</label>
+         <input
+         type='email'
+         name='email'
+         id='email'
+         pattern=".+@globex\.com"
+         value={user.email}
+         onChange={onChange}
+         autoComplete="off"
+         />
 
-       <button
-       type='submit'
-       className='loginBtn'
-       onClick={submitForm}
-       disabled={validateInputs()}
-       >
-        Login
-       </button>
-       <h5>
+      <label htmlFor='password'>Password</label>
+         <input
+         type='password'
+         name='password'
+         id='password'
+         value={user.password}
+         onChange={onChange}
+         autoComplete="off"
+         />
+
+         <button
+         type='submit'
+         className='loginBtn'
+         onClick={submitForm}
+         disabled={validateInputs()}
+         >
+          Login
+         </button>
+         <h5 >
         {
           message && message
         }
       </h5>
-    </div>
-  )
+      </div>
+    )
+  }
+
+
 }
 
 export default Login

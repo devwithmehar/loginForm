@@ -29,11 +29,11 @@ export function UserContextProvider ({children}){
 
    if(findUser == null){
     setMessage("Email or Password is incorrect!");
+    if(loginStatus) setLoginStatus(false);
    }
    else {
     if(findUser.password.trim() === user.password.trim()){
        setLoginStatus(true);
-       console.log(loginStatus)
        setMessage(`Congrats, You have login Successfully with email:  ${user.email}`);
        setUser({
         email:"",
@@ -42,6 +42,7 @@ export function UserContextProvider ({children}){
     }
     else{
       setMessage("Email or Password is incorrect!")
+      if(loginStatus) setLoginStatus(false);
     }
 
    }

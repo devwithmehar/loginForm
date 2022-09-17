@@ -1,31 +1,29 @@
-import React, {useState} from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../UserContext';
 
-const Login = ({onSubmit, heading}) => {
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-  });
+const Login = () => {
 
+ const { user, setUser, onSubmit, message } = useContext(UserContext);
 
   const onChange = (e) => {
     const {name, value} = e.target;
 
-    setData({
-      ...data,
+    setUser({
+      ...user,
       [name] : value
     });
 
   };
 
   const submitForm = (e) => {
-      
+
       onSubmit(e);
   }
 
   const validateInputs = () => {
-    if(data.username.length !== 0)
+    if(user.email.length !== 0)
     {
-      if(data.password.length !== 0)
+      if(user.password.length !== 0)
       {
         return false;
       }
@@ -40,13 +38,14 @@ const Login = ({onSubmit, heading}) => {
 
   return (
     <div className='login'>
-       <h3> {heading} </h3>
-       <label htmlFor='username'>Username</label>
+       <h3> Enter Your Details </h3>
+       <label htmlFor='email'>Email</label>
        <input
-       type='text'
-       name='username'
-       id='username'
-       value={data.username}
+       type='email'
+       name='email'
+       id='email'
+       pattern=".+@globex\.com"
+       value={user.email}
        onChange={onChange}
        autoComplete="off"
        />
@@ -56,7 +55,7 @@ const Login = ({onSubmit, heading}) => {
        type='password'
        name='password'
        id='password'
-       value={data.password}
+       value={user.password}
        onChange={onChange}
        autoComplete="off"
        />
@@ -69,6 +68,11 @@ const Login = ({onSubmit, heading}) => {
        >
         Login
        </button>
+       <h5>
+        {
+          message && message
+        }
+      </h5>
     </div>
   )
 }
